@@ -15,10 +15,11 @@
         "foregroundImage": "./assets/icon.png",
         "backgroundImage": "./assets/icon.png",
         "monochromeImage": "./assets/icon.png"
-      }
+      },
+      "package": "com.fvp1233.pokedexv2"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
     },
     "plugins": [
       [
@@ -30,6 +31,11 @@
           "backgroundColor": "#ffffff"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "cdd12822-2a7c-4d60-847c-6a6b3b6266c1"
+      }
+    }
   }
 }

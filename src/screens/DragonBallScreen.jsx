@@ -7,7 +7,7 @@ import CustomButton from "../components/CustomButton";
 import useDragonBallData from "../hooks/useDragonBallData";
 
 const DragonBallScreen = ({ onBack }) => {
-  const { planetData, loading, loadMorePlanets, hasMore } = useDragonBallData();
+  const { planetData, loading, error, loadMorePlanets, hasMore, retry } = useDragonBallData();
 
   const [searchText, setSearchText] = useState("");
 
@@ -29,7 +29,12 @@ const DragonBallScreen = ({ onBack }) => {
         onChangeText={(text) => setSearchText(text)}
       />
 
-      {loading ? (
+      {error ? (
+        <View>
+          <Text style={styles.loadingText}>{error}</Text>
+          <CustomButton title="Reintentar" onPress={retry} />
+        </View>
+      ) : loading && planetData.length === 0 ? (
         <Text style={styles.loadingText}>Cargando planetas...</Text>
       ) : (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -43,9 +48,9 @@ const DragonBallScreen = ({ onBack }) => {
         </ScrollView>
       )}
 
-      {hasMore ? (
+      {error ? null : hasMore ? (
         <CustomButton
-          title="Al dar click en este botón se cargarán 5 planetas más"
+          title={loading ? "Cargando..." : "Al dar click en este botón se cargarán 5 planetas más"}
           onPress={() => loadMorePlanets()}
         />
       ) : (
